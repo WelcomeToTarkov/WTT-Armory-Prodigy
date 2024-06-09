@@ -1,0 +1,773 @@
+{
+	"665fe0e865683281eb8e7ed6": {
+		"itemTplToClone": "5cadc190ae921500103bb3b6",
+		"parentId": "5447b5cf4bdc2d65278b4567",
+		"handbookParentId": "5b5f792486f77447ed5636b3",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigy.bundle",
+				"rcid": ""
+			},
+			"ExaminedByDefault": true,
+			"defMagType": "665fe5ed631d6b7dfcd7a4a9",
+			"defAmmo": "58864a4f2459770fcc257101",
+			"Ergonomics": 96,
+			"RecoilForceBack": 250,
+			"RecoilForceUp": 270,
+			"BaseMalfunctionChance": 0.14,
+			"Chambers": [
+				{
+					"_id": "665fe5ded041b9bfc796cad3",
+					"_mergeSlotWithChildren": false,
+					"_name": "patron_in_weapon",
+					"_parent": "665fe0e865683281eb8e7ed6",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"5efb0da7a29a85116f6ea05f",
+									"5c3df7d588a4501f290594e5",
+									"58864a4f2459770fcc257101",
+									"56d59d3ad2720bdb418b4577",
+									"5c925fa22e221601da359b7b",
+									"5a3c16fe86f77452b62de32a",
+									"5efb0e16aeb21837e749c7ff",
+									"5c0d56a986f774449d5de529",
+									"64b7bbb74b75259c590fa897"
+								]
+							}
+						]
+					},
+					"_proto": "55d4af244bdc2d962f8b4571",
+					"_required": false
+				}
+			],
+			"ammoCaliber": "Caliber9x19PARA",
+			"Slots": [
+				{
+					"_id": "5f36a0e5fbf956000b716b67",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_barrel",
+					"_parent": "5f36a0e5fbf956000b716b65",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"665fe61369cb629f514cec21"
+									
+								],
+								"Shift": 0
+							}
+						]
+					},
+					"_proto": "55d30c4c4bdc2db4468b457e",
+					"_required": true
+				},
+				{
+					"_id": "5f36a0e5fbf956000b716b69",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_reciever",
+					"_parent": "5f36a0e5fbf956000b716b65",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"665fe62bfdf6dce07f16e726"
+									
+								],
+								"Shift": 0
+							}
+						]
+					},
+					"_proto": "55d30c4c4bdc2db4468b457e",
+					"_required": true
+				},
+				{
+					"_id": "5f36a0e5fbf956000b716b6a",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_magazine",
+					"_parent": "5f36a0e5fbf956000b716b65",
+					"_props": {
+						"filters": [
+							{
+								"AnimationIndex": 0,
+								"Filter": [
+									"665fe5ed631d6b7dfcd7a4a9"
+									
+								]
+							}
+						]
+					},
+					"_proto": "55d30c394bdc2dae468b4577",
+					"_required": false
+				},
+				{
+					"_id": "5f36a0e5fbf956000b716b6b",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_trigger",
+					"_parent": "5f36a0e5fbf956000b716b65",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"665fe64b7b6c44d885b755a8"
+									
+								],
+								"Shift": 0
+							}
+						]
+					},
+					"_proto": "55d30c4c4bdc2db4468b457e",
+					"_required": true
+				},
+				{
+					"_id": "5f36a0e5fbf956000b716b6c",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_hammer",
+					"_parent": "5f36a0e5fbf956000b716b65",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"5f3e76d86cda304dcc634054",
+									"5ef35f46382a846010715a96",
+									"5ef35d2ac64c5d0dfc0571b0",
+									"5ef35bc243cb350a955a7ccd",
+									"5e81c550763d9f754677befd",
+									"665fe6a117ff1ba8218d680c"
+								],
+								"Shift": 0
+							}
+						]
+					},
+					"_proto": "55d30c4c4bdc2db4468b457e",
+					"_required": true
+				},
+				{
+					"_id": "5f36a0e5fbf956000b716b6d",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_catch",
+					"_parent": "5f36a0e5fbf956000b716b65",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"665fe6b9c3f47f67713858df"
+								],
+								"Shift": 0
+							}
+						]
+					},
+					"_proto": "55d30c4c4bdc2db4468b457e",
+					"_required": true
+				},
+				{
+					"_id": "5f36a0e5fbf956000b716b6e",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_tactical",
+					"_parent": "5f36a0e5fbf956000b716b65",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"5a800961159bd4315e3a1657",
+									"5cc9c20cd7f00c001336c65d",
+									"5d2369418abbc306c62e0c80",
+									"5b07dd285acfc4001754240d",
+									"56def37dd2720bec348b456a",
+									"5a7b483fe899ef0016170d15",
+									"5a5f1ce64f39f90b401987bc",
+									"560d657b4bdc2da74d8b4572",
+									"5a7b4900e899ef197b331a2a",
+									"6272370ee4013c5d7e31f418",
+									"6272379924e29f06af4d5ecb"
+								],
+								"Shift": 0
+							}
+						]
+					},
+					"_proto": "55d30c4c4bdc2db4468b457e",
+					"_required": false
+				}
+			]
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield Armory DS Prodigy 9x19mm Handgun",
+				"shortName": "Prodigy",
+				"description": "The Prodigy from Springfield Armory® takes the proven 1911 platform and enhances it with double-stack capacity and a performance-driven feature set. Reconfigured around a double-stack magazine, the Prodigy’s polymer grip module mounts to its forged steel frame offering capacities of 17+1.  Optics ready with an ambidextrous safety and Picatinny rail, the Prodigy combines the most beloved characteristics of the 1911 with modern capacity for unrivaled performance."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 12000,
+		"handbookPriceRoubles": 6000,
+		"addtoTraders": false,
+		"traderId": "SKIER",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 1,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainers": [
+			{
+				"ContainerName": "LOOTCONTAINER_WEAPON_BOX_4X4",
+				"Probability": 250
+			},
+			{
+				"ContainerName": "LOOTCONTAINER_DEAD_SCAV",
+				"Probability": 150
+			}
+		],
+		"masteries": true,
+		"masterySections": [
+			{
+				"Level2": 75,
+				"Level3": 100,
+				"Name": "m1911",
+				"Templates": [
+					"665fe0e865683281eb8e7ed6"
+				]
+			}
+		],
+		"addweaponpreset": true,
+		"weaponpresets": [
+			{
+				"_changeWeaponName": false,
+		"_encyclopedia": "665fe0e865683281eb8e7ed6",
+		"_id": "665ff7d237b7a44fe536ad46",
+		"_items": [
+			{
+				"_id": "bdcd5bdd18bdb2e44192d95c",
+				"_tpl": "665fe0e865683281eb8e7ed6",
+				"upd": {
+					"Repairable": {
+						"MaxDurability": 100,
+						"Durability": 100
+					},
+					"FireMode": {
+						"FireMode": "single"
+					}
+				}
+			},
+			{
+				"_id": "1f4b74a780311d55d1397a2d",
+				"_tpl": "665fe61369cb629f514cec21",
+				"parentId": "bdcd5bdd18bdb2e44192d95c",
+				"slotId": "mod_barrel"
+			},
+			{
+				"_id": "8b15a2f19c4bc09711cec747",
+				"_tpl": "665fe62bfdf6dce07f16e726",
+				"parentId": "bdcd5bdd18bdb2e44192d95c",
+				"slotId": "mod_reciever"
+			},
+			{
+				"_id": "b6f59f8be96c0520ee217c0a",
+				"_tpl": "665fe5ed631d6b7dfcd7a4a9",
+				"parentId": "bdcd5bdd18bdb2e44192d95c",
+				"slotId": "mod_magazine"
+			},
+			{
+				"_id": "db069df760cf4f0d5e6897e3",
+				"_tpl": "665fe64b7b6c44d885b755a8",
+				"parentId": "bdcd5bdd18bdb2e44192d95c",
+				"slotId": "mod_trigger"
+			},
+			{
+				"_id": "db75047e47272f4e3a92f205",
+				"_tpl": "665fe6a117ff1ba8218d680c",
+				"parentId": "bdcd5bdd18bdb2e44192d95c",
+				"slotId": "mod_hammer"
+			},
+			{
+				"_id": "fa0dddeb7fa18310a0d9a68e",
+				"_tpl": "665fe6b9c3f47f67713858df",
+				"parentId": "bdcd5bdd18bdb2e44192d95c",
+				"slotId": "mod_catch"
+			},
+			{
+				"_id": "eb050ee7a3933d33e75bf218",
+				"_tpl": "665fe70a14a35e1ed07facaf",
+				"parentId": "8b15a2f19c4bc09711cec747",
+				"slotId": "mod_sight_front",
+				"upd": {
+					"Sight": {
+						"ScopesCurrentCalibPointIndexes": [
+							0
+						],
+						"ScopesSelectedModes": [
+							0
+						],
+						"SelectedScope": 0
+					}
+				}
+			},
+			{
+				"_id": "05ab92484b1f70d1f72533e5",
+				"_tpl": "665fe63876838d24231faa26",
+				"parentId": "8b15a2f19c4bc09711cec747",
+				"slotId": "mod_scope",
+				"upd": {
+					"Sight": {
+						"ScopesCurrentCalibPointIndexes": [
+							0
+						],
+						"ScopesSelectedModes": [
+							0
+						],
+						"SelectedScope": 0
+					}
+				}
+			}
+		],
+		"_name": "prodigy",
+		"_parent": "bdcd5bdd18bdb2e44192d95c",
+		"_type": "Preset"
+	}
+		]
+	},
+	"665fe61369cb629f514cec21": {
+		"itemTplToClone": "5f3e7801153b8571434a924c",
+		"parentId": "555ef6e44bdc2de9068b457e",
+		"handbookParentId": "5b5f75c686f774094242f19f",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigybarrel.bundle",
+				"rcid": ""
+			},
+			"ExaminedByDefault": true,
+			"Recoil": -4,
+			"Ergonomics": 0
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield DS Prodigy 4.25\" Barrel",
+				"shortName": "Prodigy",
+				"description": "Standard 4.25\" bull barrel for the Springfield DS Prodigy 9x19mm handgun."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [
+			"mod_barrel"
+		],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 7250,
+		"handbookPriceRoubles": 4250,
+		"addtoTraders": false,
+		"traderId": "58330581ace78e27b8b10cee",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 5,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainer": "LOOTCONTAINER_WEAPON_BOX_4X4",
+		"Probability": 250
+	},
+	"665fe62bfdf6dce07f16e726": {
+		"itemTplToClone": "5f3e7823ddc4f03b010e2045",
+		"parentId": "55818a304bdc2db5418b457d",
+		"handbookParentId": "5b5f764186f77447ec5d7714",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigyslide.bundle",
+				"rcid": ""
+			},
+			"Ergonomics": 6,
+			"Slots": [
+				{
+					"_id": "665fe6f12ef1b437a815a529",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_sight_front",
+					"_parent": "665fe62bfdf6dce07f16e726",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"665fe70a14a35e1ed07facaf"
+								],
+								"Shift": 0
+							}
+						]
+					},
+					"_proto": "55d30c4c4bdc2db4468b457e",
+					"_required": false
+				},
+				{
+					"_id": "665fe6f658c4e6881e3001b2",
+					"_mergeSlotWithChildren": false,
+					"_name": "mod_scope",
+					"_parent": "665fe62bfdf6dce07f16e726",
+					"_props": {
+						"filters": [
+							{
+								"Filter": [
+									"665fe63876838d24231faa26",
+									"5a32aa8bc4a2826c6e06d737",
+									"577d141e24597739c5255e01",
+									"58d268fc86f774111273f8c2",
+									"616442e4faa1272e43152193"
+								],
+								"Shift": 0
+							}
+						]
+					},
+					"_proto": "55d30c4c4bdc2db4468b457e",
+					"_required": false
+				}
+			],
+			"ExaminedByDefault": true
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield Armory DS Prodigy Pistol Slide",
+				"shortName": "Prodigy",
+				"description": "Optics ready pistol slide for the Springfield DS Prodigy 9x19mm pistol."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [
+			"mod_receiver"
+		],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 11890,
+		"handbookPriceRoubles": 6540,
+		"addtoTraders": false,
+		"traderId": "58330581ace78e27b8b10cee",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 5,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainer": "LOOTCONTAINER_WEAPON_BOX_4X4",
+		"Probability": 250
+	},
+	"665fe70a14a35e1ed07facaf": {
+		"itemTplToClone": "5f3e78a7fbf956000b716b8e",
+		"parentId": "55818ac54bdc2d5b648b456e",
+		"handbookParentId": "5b5f746686f77447ec5d7708",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigyfrontsight.bundle",
+				"rcid": ""
+			},
+			"ExaminedByDefault": true
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield Armory DS Prodigy Front Sight",
+				"shortName": "Prodigy",
+				"description": "Fiber-optic front sight for the Springfield Armory DS Prodigy 9x19mm pistol."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [
+			"mod_sight_front"
+		],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 1200,
+		"handbookPriceRoubles": 650,
+		"addtoTraders": false,
+		"traderId": "58330581ace78e27b8b10cee",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 5,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainer": "LOOTCONTAINER_WEAPON_BOX_4X4",
+		"Probability": 250
+	},
+	"665fe5ed631d6b7dfcd7a4a9": {
+		"itemTplToClone": "5a718b548dc32e000d46d262",
+		"parentId": "5448bc234bdc2d3c308b4569",
+		"handbookParentId": "5b5f754a86f774094242f19b",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigymag.bundle",
+				"rcid": ""
+			},
+			"ExaminedByDefault": true
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield Armory DS Prodigy 17-Round 9x19mm Magazine",
+				"shortName": "Prodigy",
+				"description": "Standard 17-round magazine for the Springfield Armory DS Prodigy 9x19mm pistol."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [
+			"mod_magazine"
+		],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 5200,
+		"handbookPriceRoubles": 3000,
+		"addtoTraders": false,
+		"traderId": "58330581ace78e27b8b10cee",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 5,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainer": "LOOTCONTAINER_WEAPON_BOX_4X4",
+		"Probability": 250
+	},
+	"665fe63876838d24231faa26": {
+		"itemTplToClone": "5f3e7897ddc4f03b010e204a",
+		"parentId": "55818ac54bdc2d5b648b456e",
+		"handbookParentId": "5b5f746686f77447ec5d7708",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigyrearsight.bundle",
+				"rcid": ""
+			},
+			"ExaminedByDefault": true
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield Armory DS Prodigy Rear Pistol Sight",
+				"shortName": "Prodigy",
+				"description": "Rear sight for the Springfield Armory DS Prodigy 9x19mm pistol."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"RaidModdable": true,
+		"modSlot": [],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 1000,
+		"handbookPriceRoubles": 600,
+		"addtoTraders": false,
+		"traderId": "58330581ace78e27b8b10cee",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 5,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainer": "LOOTCONTAINER_WEAPON_BOX_4X4",
+		"Probability": 250
+	},
+	"665fe6b9c3f47f67713858df": {
+		"itemTplToClone": "5f3e777688ca2d00ad199d25",
+		"parentId": "5a74651486f7744e73386dd1",
+		"handbookParentId": "5b5f74cc86f77447ec5d770a",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigycatch.bundle",
+				"rcid": ""
+			},
+			"ExaminedByDefault": true
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield Armory DS Prodigy Slide Stop",
+				"shortName": "Prodigy",
+				"description": "Standard slide stop for the Springfield Armory DS Prodigy 9x19mm pistol."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [
+			"mod_catch"
+		],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 1250,
+		"handbookPriceRoubles": 650,
+		"addtoTraders": false,
+		"traderId": "58330581ace78e27b8b10cee",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 5,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainer": "LOOTCONTAINER_WEAPON_BOX_4X4",
+		"Probability": 250
+	},
+	"665fe6a117ff1ba8218d680c": {
+		"itemTplToClone": "5f3e76d86cda304dcc634054",
+		"parentId": "5a74651486f7744e73386dd1",
+		"handbookParentId": "5b5f74cc86f77447ec5d770a",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigyhammer.bundle",
+				"rcid": ""
+			},
+			"ExaminedByDefault": true
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield Armory DS Prodigy Skeletonized Hammer",
+				"shortName": "Prodigy",
+				"description": "Standard skeletonized hammer for the Springfield Armory DS Prodigy 9x19mm pistol."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": true,
+		"modSlot": [
+			"mod_hammer"
+		],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 952,
+		"handbookPriceRoubles": 450,
+		"addtoTraders": false,
+		"traderId": "58330581ace78e27b8b10cee",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 5,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainer": "LOOTCONTAINER_WEAPON_BOX_4X4",
+		"Probability": 250
+	},
+	"665fe64b7b6c44d885b755a8": {
+		"itemTplToClone": "5f3e772a670e2a7b01739a52",
+		"parentId": "5a74651486f7744e73386dd1",
+		"handbookParentId": "5b5f74cc86f77447ec5d770a",
+		"overrideProperties": {
+			"Prefab": {
+				"path": "WeaponProdigy/prodigytrigger.bundle",
+				"rcid": ""
+			},
+			"ExaminedByDefault": true,
+			"Ergonomics": 3
+		},
+		"locales": {
+			"en": {
+				"name": "Springfield Armory DS Prodigy Trigger",
+				"shortName": "Prodigy",
+				"description": "Standard trigger for the Springfield Armory DS Prodigy 9x19mm pistol."
+			}
+		},
+		"clearClonedProps": false,
+		"addtoInventorySlots": [],
+		"addtoModSlots": false,
+		"modSlot": [
+			"mod_trigger"
+		],
+		"ModdableItemWhitelist": [],
+		"ModdableItemBlacklist": [],
+		"fleaPriceRoubles": 1500,
+		"handbookPriceRoubles": 1000,
+		"addtoTraders": false,
+		"traderId": "58330581ace78e27b8b10cee",
+		"traderItems": [
+			{
+				"unlimitedCount": true,
+				"stackObjectsCount": 99
+			}
+		],
+		"barterScheme": [
+			{
+				"count": 5,
+				"_tpl": "ROUBLES"
+			}
+		],
+		"loyallevelitems": 1,
+		"addtoBots": false,
+		"addtoStaticLootContainers": false,
+		"StaticLootContainer": "LOOTCONTAINER_WEAPON_BOX_4X4",
+		"Probability": 250
+	}
+}
