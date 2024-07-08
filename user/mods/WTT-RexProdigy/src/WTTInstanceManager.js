@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WTTInstanceManager = void 0;
 const path = __importStar(require("path"));
 class WTTInstanceManager {
-    //#region Accessible in or after preAkiLoad
+    //#region Accessible in or after preSptLoad
     modName;
     debug;
     // Useful Paths
@@ -35,7 +35,7 @@ class WTTInstanceManager {
     profilePath = path.join(process.cwd(), "\\user\\profiles");
     // Instances
     container;
-    preAkiModLoader;
+    PreSptModLoader;
     configServer;
     saveServer;
     itemHelper;
@@ -59,10 +59,10 @@ class WTTInstanceManager {
     vfs;
     //#endregion
     // Call at the start of the mods postDBLoad method
-    preAkiLoad(container, mod) {
+    preSptLoad(container, mod) {
         this.modName = mod;
         this.container = container;
-        this.preAkiModLoader = container.resolve("PreAkiModLoader");
+        this.PreSptModLoader = container.resolve("PreSptModLoader");
         this.imageRouter = container.resolve("ImageRouter");
         this.configServer = container.resolve("ConfigServer");
         this.saveServer = container.resolve("SaveServer");

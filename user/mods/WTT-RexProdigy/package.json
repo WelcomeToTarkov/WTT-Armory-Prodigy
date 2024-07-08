@@ -1,10 +1,10 @@
 {
     "name": "WTTRexProdigy",
     "author": "Rexana",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "license": "NCSA",
     "main": "src/mod.js",
-    "akiVersion": "~3.8",
+    "sptVersion": "~3.9",
 	"loadBefore": [],
 	"loadAfter": [],
     "isBundleMod": true,

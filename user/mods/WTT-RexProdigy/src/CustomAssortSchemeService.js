@@ -29,7 +29,7 @@ const configConsts_1 = require("./references/configConsts");
 class CustomAssortSchemeService {
     Instance;
     assortSchemes;
-    preAkiLoad(Instance) {
+    preSptLoad(Instance) {
         this.Instance = Instance;
     }
     postDBLoad() {

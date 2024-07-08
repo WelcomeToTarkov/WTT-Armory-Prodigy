@@ -8,7 +8,7 @@ export class CustomWeaponPresets {
     private Instance: WTTInstanceManager;
     private assortSchemes: any;
 
-    public preAkiLoad(Instance: WTTInstanceManager): void {
+    public preSptLoad(Instance: WTTInstanceManager): void {
         this.Instance = Instance;
     }
 

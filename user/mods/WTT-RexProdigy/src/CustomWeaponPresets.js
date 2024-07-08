@@ -22,24 +22,34 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomWeaponPresets = void 0;
-const weaponPresets = __importStar(require("../db/CustomWeaponPresets/WeaponPresets.json"));
+const WeaponPresets_json_1 = __importDefault(require("../db/CustomWeaponPresets/WeaponPresets.json"));
 const path = __importStar(require("path"));
 const modPath = path.normalize(path.join(__dirname, ".."));
 class CustomWeaponPresets {
     Instance;
     assortSchemes;
-    preAkiLoad(Instance) {
+    preSptLoad(Instance) {
         this.Instance = Instance;
     }
     postDBLoad() {
-        this.addWeaponPresets();
-        this.addWeaponPresetLocales();
+        if (WeaponPresets_json_1.default.ItemPresets) {
+            this.addWeaponPresets();
+            this.addWeaponPresetLocales();
+        }
+        else {
+            if (this.Instance.debug) {
+                console.log("CustomWeaponPresets: ItemPresets not found in weaponPresets.json");
+            }
+        }
     }
     addWeaponPresets() {
-        for (const preset in weaponPresets.ItemPresets)
-            this.Instance.database.globals.ItemPresets[preset] = weaponPresets.ItemPresets[preset];
+        for (const preset in WeaponPresets_json_1.default.ItemPresets)
+            this.Instance.database.globals.ItemPresets[preset] = WeaponPresets_json_1.default.ItemPresets[preset];
     }
     addWeaponPresetLocales() {
         const serverLocales = ["ch", "cz", "en", "es", "es-mx", "fr", "ge", "hu", "it", "jp", "kr", "pl", "po", "ru", "sk", "tu"];

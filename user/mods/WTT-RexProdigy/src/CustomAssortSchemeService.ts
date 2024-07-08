@@ -2,13 +2,13 @@
 import { WTTInstanceManager } from "./WTTInstanceManager";
 import * as customAssortSchemes from "../db/CustomAssortSchemes/CustomAssortSchemes.json";
 import { traderIDs } from "./references/configConsts";
-import { ITraderAssort } from "@spt-aki/models/eft/common/tables/ITrader";
+import { ITraderAssort } from "@spt/models/eft/common/tables/ITrader";
 export class CustomAssortSchemeService 
 {
     private Instance: WTTInstanceManager;
     private assortSchemes: any;
 
-    public preAkiLoad(Instance: WTTInstanceManager): void 
+    public preSptLoad(Instance: WTTInstanceManager): void 
     {
         this.Instance = Instance;
     }

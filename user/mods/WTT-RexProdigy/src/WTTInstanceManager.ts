@@ -1,31 +1,31 @@
 import * as path from "path";
 
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { ProfileController } from "@spt-aki/controllers/ProfileController";
-import { ProfileCallbacks } from "@spt-aki/callbacks/ProfileCallbacks";
-import { EventOutputHolder } from "@spt-aki/routers/EventOutputHolder";
-import { DatabaseServer } from "@spt-aki/servers/DatabaseServer";
-import { IDatabaseTables } from "@spt-aki/models/spt/server/IDatabaseTables";
-import { StaticRouterModService } from "@spt-aki/services/mod/staticRouter/StaticRouterModService";
-import { DynamicRouterModService } from "@spt-aki/services/mod/dynamicRouter/DynamicRouterModService";
-import { TraderAssortService } from "@spt-aki/services/TraderAssortService";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ProfileController } from "@spt/controllers/ProfileController";
+import { ProfileCallbacks } from "@spt/callbacks/ProfileCallbacks";
+import { EventOutputHolder } from "@spt/routers/EventOutputHolder";
+import { DatabaseServer } from "@spt/servers/DatabaseServer";
+import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
+import { StaticRouterModService } from "@spt/services/mod/staticRouter/StaticRouterModService";
+import { DynamicRouterModService } from "@spt/services/mod/dynamicRouter/DynamicRouterModService";
+import { TraderAssortService } from "@spt/services/TraderAssortService";
 import { DependencyContainer } from "tsyringe";
-import { CustomItemService } from "@spt-aki/services/mod/CustomItemService";
-import { ImageRouter } from "@spt-aki/routers/ImageRouter";
-import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
-import { ConfigServer } from "@spt-aki/servers/ConfigServer";
-import { JsonUtil } from "@spt-aki/utils/JsonUtil";
-import { ProfileHelper } from "@spt-aki/helpers/ProfileHelper";
-import { RagfairPriceService } from "@spt-aki/services/RagfairPriceService";
-import { ImporterUtil } from "@spt-aki/utils/ImporterUtil";
-import { SaveServer } from "@spt-aki/servers/SaveServer";
-import { ItemHelper } from "@spt-aki/helpers/ItemHelper";
-import { ApplicationContext } from "@spt-aki/context/ApplicationContext";
-import { VFS } from "@spt-aki/utils/VFS";
+import { CustomItemService } from "@spt/services/mod/CustomItemService";
+import { ImageRouter } from "@spt/routers/ImageRouter";
+import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
+import { ConfigServer } from "@spt/servers/ConfigServer";
+import { JsonUtil } from "@spt/utils/JsonUtil";
+import { ProfileHelper } from "@spt/helpers/ProfileHelper";
+import { RagfairPriceService } from "@spt/services/RagfairPriceService";
+import { ImporterUtil } from "@spt/utils/ImporterUtil";
+import { SaveServer } from "@spt/servers/SaveServer";
+import { ItemHelper } from "@spt/helpers/ItemHelper";
+import { ApplicationContext } from "@spt/context/ApplicationContext";
+import { VFS } from "@spt/utils/VFS";
 
 export class WTTInstanceManager 
 {
-    //#region Accessible in or after preAkiLoad
+    //#region Accessible in or after preSptLoad
     public modName: string;
     public debug: boolean;
     // Useful Paths
@@ -35,7 +35,7 @@ export class WTTInstanceManager
 
     // Instances
     public container: DependencyContainer;
-    public preAkiModLoader: PreAkiModLoader;
+    public PreSptModLoader: PreSptModLoader;
     public configServer: ConfigServer;
     public saveServer: SaveServer;
     public itemHelper: ItemHelper;
@@ -61,12 +61,12 @@ export class WTTInstanceManager
     //#endregion
 
     // Call at the start of the mods postDBLoad method
-    public preAkiLoad(container: DependencyContainer, mod: string): void
+    public preSptLoad(container: DependencyContainer, mod: string): void
     {
         this.modName = mod;
 
         this.container = container;
-        this.preAkiModLoader = container.resolve<PreAkiModLoader>("PreAkiModLoader");
+        this.PreSptModLoader = container.resolve<PreSptModLoader>("PreSptModLoader");
         this.imageRouter = container.resolve<ImageRouter>("ImageRouter");
         this.configServer = container.resolve<ConfigServer>("ConfigServer");
         this.saveServer = container.resolve<SaveServer>("SaveServer");
