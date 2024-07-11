@@ -18,6 +18,7 @@ import * as path from "path";
 import { WTTInstanceManager } from "./WTTInstanceManager";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
 import { JsonUtil } from "@spt/utils/JsonUtil";
+import { ILocation } from "@spt/models/eft/common/ILocation";
 
 export class CustomItemService {
     private configs: ConfigItem;
@@ -135,39 +136,60 @@ export class CustomItemService {
     }
 
     /**
-   * Adds an item to a static loot container with a given probability.
-   *
-   * @param {string} containerID - The ID of the loot container.
-   * @param {string} itemToAdd - The item to add to the loot container.
-   * @param {number} probability - The probability of the item being added.
-   * @return {void} This function does not return anything.
-   */
+     * Adds an item to a static loot container with a given probability.
+     *
+     * @param {string} containerID - The ID of the loot container.
+     * @param {string} itemToAdd - The item to add to the loot container.
+     * @param {number} probability - The probability of the item being added.
+     * @return {void} This function does not return anything.
+     */
     private addToStaticLoot(
         containerID: string,
         itemToAdd: string,
         probability: number
     ): void {
-        const lootContainer = this.Instance.database.loot.staticLoot[containerID];
+        const locations = this.Instance.database.locations;
 
-        if (!lootContainer) {
-            console.error(`Error: Invalid loot container ID: ${containerID}`);
-            return;
-        }
+        for (const locationID in locations) {
+            if (locations.hasOwnProperty(locationID)) {
+                const location: ILocation = locations[locationID];
 
-        const lootDistribution = lootContainer.itemDistribution;
-        const templateFromMap = ItemMap[itemToAdd];
-        const finalTemplate = templateFromMap || itemToAdd;
+                if (location.staticLoot) {
+                    const staticLoot = location.staticLoot;
 
-        const newLoot = [
-            {
-                tpl: finalTemplate,
-                relativeProbability: probability
+                    if (staticLoot.hasOwnProperty(containerID)) {
+                        const lootContainer = staticLoot[containerID];
+
+                        if (lootContainer) {
+                            const lootDistribution = lootContainer.itemDistribution;
+                            const templateFromMap = ItemMap[itemToAdd];
+                            const finalTemplate = templateFromMap || itemToAdd;
+
+                            const newLoot = [
+                                {
+                                    tpl: finalTemplate,
+                                    relativeProbability: probability
+                                }
+                            ];
+
+                            lootDistribution.push(...newLoot);
+                            lootContainer.itemDistribution = lootDistribution;
+                            if (this.Instance.debug) { 
+                                console.log(`Added ${itemToAdd} to loot container: ${containerID} in location: ${locationID}`);
+                            }
+                        } else {
+                            console.error(`Error: Loot container ID ${containerID} not found in location: ${locationID}`);
+                        }
+                    } else {
+                        console.error(`Error: Invalid loot container ID: ${containerID} in location: ${locationID}`);
+                    }
+                } else {
+                    console.warn(`Warning: No static loot found in location: ${locationID}`);
+                }
             }
-        ];
-
-        lootDistribution.push(...newLoot);
-        lootContainer.itemDistribution = lootDistribution;
+        }
     }
+
 
     /**
    * Processes the static loot containers for a given item.

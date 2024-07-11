@@ -1,12 +1,17 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { WTTInstanceManager } from "./WTTInstanceManager";
-import weaponPresets from "../db/CustomWeaponPresets/WeaponPresets.json";
+import weaponPresetsData from "../db/CustomWeaponPresets/WeaponPresets.json";
 import * as path from "path";
 const modPath = path.normalize(path.join(__dirname, ".."));
 
+interface WeaponPresets {
+    ItemPresets?: any; // or you can specify a more accurate type if known
+}
+
+const weaponPresets: WeaponPresets = weaponPresetsData;
+
 export class CustomWeaponPresets {
     private Instance: WTTInstanceManager;
-    private assortSchemes: any;
 
     public preSptLoad(Instance: WTTInstanceManager): void {
         this.Instance = Instance;
@@ -16,19 +21,19 @@ export class CustomWeaponPresets {
         if (weaponPresets.ItemPresets) {
             this.addWeaponPresets();
             this.addWeaponPresetLocales();
-        }
-        else {
+        } else {
             if (this.Instance.debug) {
                 console.log("CustomWeaponPresets: ItemPresets not found in weaponPresets.json");
             }
         }
-
     }
+
     public addWeaponPresets(): void {
-
-        for (const preset in weaponPresets.ItemPresets) this.Instance.database.globals.ItemPresets[preset] = weaponPresets.ItemPresets[preset];
-
+        for (const preset in weaponPresets.ItemPresets) {
+            this.Instance.database.globals.ItemPresets[preset] = weaponPresets.ItemPresets[preset];
+        }
     }
+
     public addWeaponPresetLocales(): void {
         const serverLocales = ["ch", "cz", "en", "es", "es-mx", "fr", "ge", "hu", "it", "jp", "kr", "pl", "po", "ru", "sk", "tu"];
         const addedLocales = {};
@@ -38,8 +43,7 @@ export class CustomWeaponPresets {
             try {
                 // Attempt to require the locale file
                 localeFile = require(`${modPath}/db/locales/${locale}.json`);
-            }
-            catch (error) {
+            } catch (error) {
                 // Log an error if the file cannot be found, but continue to the next iteration
                 if (this.Instance.debug) {
                     console.error(`Error loading locale file for '${locale}':`, error);
