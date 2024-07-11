@@ -16,16 +16,19 @@ import { LogTextColor } from "@spt/models/spt/logging/LogTextColor";
 import * as fs from "fs";
 import * as path from "path";
 import { WTTInstanceManager } from "./WTTInstanceManager";
+import { QuestModifier } from "./QuestModifier";
 import { IDatabaseTables } from "@spt/models/spt/server/IDatabaseTables";
-import { JsonUtil } from "@spt/utils/JsonUtil";
 import { ILocation } from "@spt/models/eft/common/ILocation";
+import { IPreset } from "@spt/models/eft/common/IGlobals";
 
 export class CustomItemService {
     private configs: ConfigItem;
     private Instance: WTTInstanceManager;
+    private questModifier: QuestModifier;
 
     constructor() {
         this.configs = this.loadCombinedConfig();
+        this.questModifier = new QuestModifier();
     }
 
     public preSptLoad(Instance: WTTInstanceManager): void {
@@ -33,8 +36,6 @@ export class CustomItemService {
     }
 
     public postDBLoad(): void {
-        //const jsonUtil = this.Instance.container.resolve("JsonUtil");
-
         let numItemsAdded = 0;
 
         for (const itemId in this.configs) {
@@ -53,13 +54,9 @@ export class CustomItemService {
             this.processInventorySlots(itemConfig, itemId); // Pass itemId and inventorySlots in the correct order
             this.processMasterySections(itemConfig, itemId);
             this.processWeaponPresets(itemConfig, itemId);
-            this.processBotInventories(
-                itemConfig,
-                finalItemTplToClone,
-                itemId
-            );
             this.processTraders(itemConfig, itemId);
-            this.modifyQuests(this.Instance.database, this.Instance.jsonUtil);
+            this.addtoHallofFame(itemConfig, itemId);
+            this.addtoSpecialSlots(itemConfig, itemId);
             numItemsAdded++;
         }
 
@@ -78,7 +75,17 @@ export class CustomItemService {
         }
 
 
+        for (const itemId in this.configs) {
+            const itemConfig = this.configs[itemId];
+
+            this.processBotInventories(itemConfig, itemConfig.itemTplToClone, itemId);
+
+        }
+
+        this.questModifier.modifyQuests(this.Instance.database, this.Instance.jsonUtil, this.Instance.debug);
+
     }
+
 
 
     /**
@@ -178,18 +185,23 @@ export class CustomItemService {
                                 console.log(`Added ${itemToAdd} to loot container: ${containerID} in location: ${locationID}`);
                             }
                         } else {
-                            console.error(`Error: Loot container ID ${containerID} not found in location: ${locationID}`);
+                            if (this.Instance.debug) {
+                                console.log(`Error: Loot container ID ${containerID} not found in location: ${locationID}`);
+                            }
                         }
                     } else {
-                        console.error(`Error: Invalid loot container ID: ${containerID} in location: ${locationID}`);
+                        if (this.Instance.debug) {
+                            console.log(`Error: Loot container ID ${containerID} not found in location: ${locationID}`);
+                        }
                     }
                 } else {
-                    console.warn(`Warning: No static loot found in location: ${locationID}`);
+                    if (this.Instance.debug) {
+                        console.warn(`Warning: No static loot found in location: ${locationID}`);
+                    }
                 }
             }
         }
     }
-
 
     /**
    * Processes the static loot containers for a given item.
@@ -483,98 +495,6 @@ export class CustomItemService {
     }
 
     /**
- * Modify the quests in the given tables using the provided JSON utility.
- *
- * @param {IDatabaseTables} tables - the tables containing the quests
- * @param {JsonUtil} jsonUtil - the JSON utility for cloning objects
- * @return {void} 
- */
-    private modifyQuests(tables: IDatabaseTables, jsonUtil: JsonUtil): void {
-        // Define new pistols
-        const newPistols = [
-            "665fe0e865683281eb8e7ed6"
-        ];
-        // Get the specific quest
-        const stirrup = tables.templates.quests["596b455186f77457cb50eccb"];
-        if (stirrup) {
-            // Extract existing pistols
-            const existingStirrupPistols = stirrup.conditions.AvailableForFinish[0].counter.conditions[0].weapon;
-            try {
-                // Clone the existing pistols array
-                const updatedPistols = jsonUtil.clone(existingStirrupPistols);
-                let modified = false;
-                // Add new pistols if they do not already exist
-                for (const pistol of newPistols) {
-                    if (!updatedPistols.includes(pistol)) {
-                        updatedPistols.push(pistol);
-                        modified = true;
-
-                        if (this.Instance.debug) {
-                            console.log("Added new pistol:", pistol);
-                        }
-                    }
-                    else {
-                        if (this.Instance.debug) {
-                            console.log("Pistol already exists:", pistol);
-                        }
-                    }
-                }
-                // Only update the quest if modifications were made
-                if (modified) {
-                    stirrup.conditions.AvailableForFinish[0].counter.conditions[0].weapon = updatedPistols;
-
-                    if (this.Instance.debug) {
-                        console.log("Modified quest:", stirrup.conditions.AvailableForFinish[0].counter.conditions[0].weapon);
-                    }
-                }
-            }
-            catch (error) {
-                console.error("Error modifying quests:", error);
-            }
-        }
-
-        // Get the specific quest
-        const mallCop = tables.templates.quests["64e7b99017ab941a6f7bf9d7"];
-
-        if (mallCop) {
-            // Extract existing pistols
-            const existingmallCopPistols = mallCop.conditions.AvailableForFinish[0].counter.conditions[0].weapon;
-            try {
-                // Clone the existing pistols array
-                const updatedPistols = jsonUtil.clone(existingmallCopPistols);
-                let modified = false;
-                // Add new pistols if they do not already exist
-                for (const pistol of newPistols) {
-                    if (!updatedPistols.includes(pistol)) {
-                        updatedPistols.push(pistol);
-                        modified = true;
-
-                        if (this.Instance.debug) {
-                            console.log("Added new pistol:", pistol);
-                        }
-                    }
-                    else {
-                        if (this.Instance.debug) {
-                            console.log("Pistol already exists:", pistol);
-                        }
-                    }
-                }
-                // Only update the quest if modifications were made
-                if (modified) {
-                    mallCop.conditions.AvailableForFinish[0].counter.conditions[0].weapon = updatedPistols;
-
-                    if (this.Instance.debug) {
-                        console.log("Modified quest:", mallCop.conditions.AvailableForFinish[0].counter.conditions[0].weapon);
-                    }
-                }
-            }
-            catch (error) {
-                console.error("Error modifying quests:", error);
-            }
-        }
-    }
-
-    /**
    * Processes traders based on the item configuration.
    *
    * @param {any} itemConfig - The configuration of the item.
@@ -650,43 +570,262 @@ export class CustomItemService {
         trader.assort.loyal_level_items[itemId] = itemConfig.loyallevelitems;
     }
 
+    private addtoHallofFame(itemConfig: ConfigItem[string], itemId: string) {
+        const hallofFame1 = this.Instance.database.templates.items["63dbd45917fff4dee40fe16e"];
+        const hallofFame2 = this.Instance.database.templates.items["65424185a57eea37ed6562e9"];
+        const hallofFame3 = this.Instance.database.templates.items["6542435ea57eea37ed6562f0"];
+
+        // Add to Hall of Fame filters
+        if (itemConfig.addtoHallOfFame) {
+            const hallOfFames = [hallofFame1, hallofFame2, hallofFame3];
+            hallOfFames.forEach((hall) => {
+                for (const slot of hall._props.Slots) {
+                    for (const filter of slot._props.filters) {
+                        if (!filter.Filter.includes(itemId)) {
+                            filter.Filter.push(itemId);
+                            if (this.Instance.debug) {
+                                console.log(`Added item ${itemId} to filter Hall of Fame ${hall._name}`);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    private addtoSpecialSlots(itemConfig: ConfigItem[string], itemId: string) {
+        const tables = this.Instance.database;
+        if (itemConfig.addtoSpecialSlots) {
+            const pockets = tables.templates.items["627a4e6b255f7527fb05a0f6"];
+            for (const slot of pockets._props.Slots) {
+                if (!slot._props.filters[0].Filter.includes(itemId)) {
+                    slot._props.filters[0].Filter.push(itemId);
+                }
+            }
+        }
+    }
 
     /**
-   * Processes the bot inventories based on the given item configuration.
-   *
-   * @param {any} itemConfig - The item configuration.
-   * @param {string} finalItemTplToClone - The final item template to clone.
-   * @param {string} itemId - The item ID.
-   * @return {void} This function does not return anything.
-   */
+     * Processes the bot inventories based on the given item configuration.
+     *
+     * @param {ConfigItem[string]} itemConfig - The item configuration.
+     * @param {string} finalItemTplToClone - The final item template to clone.
+     * @param {string} itemId - The item ID.
+     * @return {void} This function does not return anything.
+     */
     private processBotInventories(
         itemConfig: ConfigItem[string],
         finalItemTplToClone: string,
         itemId: string
     ): void {
         const tables = this.Instance.database;
-        if (itemConfig.addtoBots) {
-            if (this.Instance.debug) {
-                console.log("Processing traders for item:", itemId);
+
+        if (!itemConfig.addtoBots) return;
+
+        if (this.Instance.debug) {
+            console.log("Processing bot inventories for item:", itemId);
+        }
+
+        // Iterate through bot types
+        for (const botId in tables.bots.types) {
+            const botType = botId;
+            const botInventory = tables.bots.types[botId].inventory;
+
+            botInventory.Ammo = botInventory.Ammo || {};
+
+            // Process items and equipment
+            this.processInventoryType(botInventory.items, finalItemTplToClone, itemId, botType, "items");
+            this.processInventoryType(botInventory.equipment, finalItemTplToClone, itemId, botType, "equipment");
+
+            // Process mods if applicable
+            if (itemConfig.addtoModSlots && itemConfig.modSlot) {
+                this.processBotModSlots(finalItemTplToClone, itemId, botType, itemConfig.modSlot);
             }
-            for (const botId in tables.bots.types) {
-                const botType = allBotTypes[botId];
-                if (botType) {
-                    for (const lootSlot in tables.bots.types[botId].inventory.items) {
-                        const items = tables.bots.types[botId].inventory.items;
-                        // Check if the loot slot contains the final item template
-                        if (items[lootSlot][finalItemTplToClone] !== undefined) {
-                            const weight = items[lootSlot][finalItemTplToClone];
-                            if (this.Instance.debug) {
-                                console.log(` - Adding item to bot inventory for bot type: ${botType} in loot slot: ${lootSlot} with weight: ${weight}`);
+
+
+        }
+    }
+
+    /**
+     * Processes inventory type (items or equipment) and gathers mods based on Slots.
+     *
+     * @param {any} inventoryType - The inventory type to process.
+     * @param {string} finalTplToClone - The final item template to clone.
+     * @param {string} itemId - The item ID.
+     * @param {string} botType - The bot type identifier.
+     * @param {string} typeLabel - Label indicating items or equipment.
+     * @return {void} This function does not return anything.
+     */
+    private processInventoryType(
+        inventoryType: any,
+        finalTplToClone: string,
+        itemId: string,
+        botType: string,
+        typeLabel: string
+    ): void {
+        const tables = this.Instance.database;
+        if (typeLabel === "equipment" && (
+            (inventoryType.FirstPrimaryWeapon && inventoryType.FirstPrimaryWeapon[finalTplToClone]) ||
+            (inventoryType.SecondPrimaryWeapon && inventoryType.SecondPrimaryWeapon[finalTplToClone]) ||
+            (inventoryType.Holster && inventoryType.Holster[finalTplToClone])
+        )) {
+            if (!this.ensureValidWeaponPreset(itemId)) {
+                return;
+            }
+            else {
+                this.processAmmoAndChambers(tables.bots.types[botType].inventory, tables.templates.items[itemId]._props, itemId, botType);
+            }
+        }
+
+        for (const lootSlot in inventoryType) {
+            const items = inventoryType[lootSlot];
+            if (items && items[finalTplToClone] !== undefined) {
+                const weight = items[finalTplToClone];
+                if (this.Instance.debug) {
+                    console.log(` - Adding item to bot ${typeLabel} for bot type: ${botType} in loot slot: ${lootSlot} with weight: ${weight}`);
+                }
+                items[itemId] = weight;
+
+                this.addModsToItem(tables, itemId, botType);
+            }
+        }
+    }
+
+    /**
+     * Adds mods to an item based on its Slots configuration.
+     *
+     * @param {any} tables - The database tables.
+     * @param {string} itemId - The item ID.
+     * @param {string} botType - The bot type identifier.
+     * @return {void} This function does not return anything.
+     */
+    private addModsToItem(tables: IDatabaseTables, itemId: string, botType: string): void {
+        const itemProps = tables.templates.items[itemId]._props;
+        if (itemProps && itemProps.Slots) {
+            for (const slot of itemProps.Slots) {
+                const slotName = slot._name;
+                const filters = slot._props.filters;
+                if (filters && filters.length > 0) {
+                    for (const filter of filters) {
+                        for (const modId of filter.Filter) {
+                            if (modId && tables.templates.items[modId]) {
+                                tables.bots.types[botType].inventory.mods[itemId] = tables.bots.types[botType].inventory.mods[itemId] || {};
+                                tables.bots.types[botType].inventory.mods[itemId][slotName] = tables.bots.types[botType].inventory.mods[itemId][slotName] || [];
+                                if (!tables.bots.types[botType].inventory.mods[itemId][slotName].includes(modId)) {
+                                    tables.bots.types[botType].inventory.mods[itemId][slotName].push(modId);
+                                    if (tables.templates.items[modId]._props) {
+                                        if (tables.templates.items[modId]._props.Slots.length > 0) {
+                                            this.addModsToItem(tables, modId, botType);
+                                        }
+                                    }
+                                }
+                                if (this.Instance.debug) {
+                                    console.log(` - Added mod ${modId} to ${itemId}'s ${slotName} of bot type ${botType}`);
+                                }
                             }
-                            // Push the item to the loot slot with the corresponding weight
-                            items[lootSlot][itemId] = weight;
                         }
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Processes mod slots and adds itemId to specified slots if finalItemTplToClone is present.
+     *
+     * @param {any} mods - The mods inventory.
+     * @param {string} finalItemTplToClone - The final item template to clone.
+     * @param {string} itemId - The item ID.
+     * @param {string} botType - The bot type identifier.
+     * @param {string[]} modSlots - The list of mod slots to process.
+     * @return {void} This function does not return anything.
+     */
+    private processBotModSlots(
+        finalItemTplToClone: string,
+        itemId: string,
+        botType: string,
+        modSlots: string[]
+    ): void {
+        const mods = this.Instance.database.bots.types[botType].inventory.mods;
+        for (const item in mods) {
+            const itemMods = mods[item];
+
+            for (const modSlot of modSlots) {
+                if (itemMods[modSlot] && itemMods[modSlot].includes(finalItemTplToClone)) {
+                    itemMods[modSlot].push(itemId);
+                    if (this.Instance.debug) {
+                        console.log(` - Added item ${itemId} to mod slot ${modSlot} for bot type ${botType} in item ${item}`);
+                    }
+
+                    // Adding nested mods for the new item
+                    this.addModsToItem(this.Instance.database, itemId, botType);
+                }
+            }
+        }
+    }
+
+    /**
+     * Processes ammo and chambers, adding calibers and chamber filters if needed.
+     *
+     * @param {any} botInventory - The bot's inventory.
+     * @param {any} itemProps - The properties of the item.
+     * @param {string} itemId - The item ID.
+     * @param {string} botType - The bot type identifier.
+     * @return {void} This function does not return anything.
+     */
+    private processAmmoAndChambers(
+        botInventory: any,
+        itemProps: any,
+        itemId: string,
+        botType: string
+    ): void {
+        const ammoCaliber = itemProps.ammoCaliber;
+        if (!ammoCaliber) return;
+
+        botInventory.Ammo[ammoCaliber] = botInventory.Ammo[ammoCaliber] || {};
+
+        if (this.Instance.debug) {
+            console.log(` - Added new caliber ${ammoCaliber} to bot inventory for bot type ${botType}`);
+        }
+
+        if (itemProps.Chambers) {
+            for (const chamber of itemProps.Chambers) {
+                const filters = chamber._props.filters;
+                if (filters && filters.length > 0) {
+                    for (const filter of filters) {
+                        for (const filterItem of filter.Filter) {
+                            botInventory.Ammo[ammoCaliber][filterItem] = botInventory.Ammo[ammoCaliber][filterItem] || 0;
+                            if (this.Instance.debug) {
+                                console.log(` - Added filter item ${filterItem} to caliber ${ammoCaliber} in bot inventory for bot type ${botType}`);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Ensures the weapon has a valid preset in the global ItemPresets.
+     *
+     * @param {string} itemId - The item ID.
+     * @return {boolean} True if the weapon has a valid preset, false otherwise.
+     */
+    private ensureValidWeaponPreset(itemId: string): boolean {
+        const db = this.Instance.database;
+        const presets : Record<string, IPreset> = db.globals.ItemPresets;
+        for (const presetObj of Object.values(presets)) {
+            if (presetObj._items[0]._tpl === itemId) {
+                if (this.Instance.debug) {
+                    console.log(` - Valid preset found for item ${itemId}`);
+                }
+                return true;
+            }
+        }
+        if (this.Instance.debug) {
+            console.warn(`No valid preset found for item ${itemId} in globals.ItemPresets`);
+        }
+        return false;
     }
 
 

@@ -28,7 +28,7 @@ export interface ConfigItem
         clearClonedProps: boolean;
         addtoInventorySlots: string[];
         addtoModSlots: boolean;
-        modSlot: string;
+        modSlot: string[];
         ModdableItemWhitelist: string;
         ModdableItemBlacklist: string;
         addtoTraders: boolean;
@@ -55,6 +55,9 @@ export interface ConfigItem
         };
         addweaponpreset: boolean;
         weaponpresets: Preset[];
+        addtoHallOfFame: boolean;
+        addtoSpecialSlots: boolean;
+    };
     };
 }
 
